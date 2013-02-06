@@ -37,7 +37,7 @@ public class Constants {
 	public static String TELEPHONE_NOT_OK = "Telephone NOT OK. Only numeric and 4-20 characters.";
 	
 	public static String XML_ROOT_ELEMENT_NAME = "DataEntryXML";
-	public static String XML_PEOPLE_ELEMENT_NAME = "People";
+	public static String XML_PEOPLE_ELEMENT_NAME = "Person";
 	public static String XML_PEOPLE_ATTRIBUTE_NAME = "ID";
 	public static String XML_FILE_LOCATION = "res/people.xml";
 	public static String XML_PERSON_ELEMENT_NAME = "Name";
