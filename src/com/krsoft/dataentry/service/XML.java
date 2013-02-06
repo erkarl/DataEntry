@@ -35,6 +35,9 @@ public class XML {
 		this.userInputList = userInputList;
 	}
 
+	/**
+	 * Creates an XML file from userInputList.
+	 */
 	public void createXML() {
 		try {
 			int id = 1;
@@ -42,7 +45,7 @@ public class XML {
 					.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
-			// root element
+			// Root
 			Document doc = docBuilder.newDocument();
 			Element rootElement = doc
 					.createElement(Constants.XML_ROOT_ELEMENT_NAME);
@@ -50,12 +53,12 @@ public class XML {
 
 			for (Person userInput : userInputList) {
 
-				// people
+				// Person
 				Element people = doc
 						.createElement(Constants.XML_PEOPLE_ELEMENT_NAME);
 				rootElement.appendChild(people);
 
-				// set attribute to staff element
+				// ID
 				Attr attr = doc
 						.createAttribute(Constants.XML_PEOPLE_ATTRIBUTE_NAME);
 				attr.setValue(String.valueOf(id));
@@ -89,16 +92,13 @@ public class XML {
 
 				id++;
 			}
-			// write the content into xml file
+			// Write the content into xml file
 			TransformerFactory transformerFactory = TransformerFactory
 					.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
 			StreamResult result = new StreamResult(new File(
 					Constants.XML_FILE_LOCATION));
-
-			// Output to console for testing
-			// StreamResult result = new StreamResult(System.out);
 
 			transformer.transform(source, result);
 

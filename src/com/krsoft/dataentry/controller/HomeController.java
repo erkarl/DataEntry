@@ -18,9 +18,13 @@ public class HomeController {
 
 		// Create new ArrayList to store all potential user input
 		XML handleXML =  new XML(getUserInputList());
+		// Create the XML file
 		handleXML.createXML();
 	}
 
+	/**
+	 * @return Validated person objects.
+	 */
 	private static List<Person> getUserInputList() {
 		List<Person> userInputList = new ArrayList<Person>();
 		boolean isExit = false;
@@ -35,6 +39,9 @@ public class HomeController {
 		return userInputList;
 	}
 
+	/**
+	 * @return Validated Person object.
+	 */
 	private static Person getUserInput() {
 		System.out.println(Constants.DATA_ENTRY_BEGIN);
 		Person userInput = new Person(getUserName(), getUserSSN(),
@@ -48,6 +55,9 @@ public class HomeController {
 		return userInput;
 	}
 
+	/**
+	 * @return Validated telephone input.
+	 */
 	private static String getUserTelephone() {
 		System.out.println(Constants.PLEASE_ENTER_TELEPHONE);
 		String userInputText = getUserInputText();
@@ -59,6 +69,9 @@ public class HomeController {
 		}
 	}
 
+	/**
+	 * @return Validated address input.
+	 */
 	private static String getUserAddress() {
 		System.out.println(Constants.PLEASE_ENTER_ADDRESS);
 		String userInputText = getUserInputText();
@@ -70,6 +83,9 @@ public class HomeController {
 		}
 	}
 
+	/**
+	 * @return Validated name input.
+	 */
 	private static String getUserName() {
 		System.out.println(Constants.PLEASE_ENTER_NAME);
 		String userInputText = getUserInputText();
@@ -81,6 +97,9 @@ public class HomeController {
 		}
 	}
 
+	/**
+	 * @return Validated SSN input.
+	 */
 	private static String getUserSSN() {
 		System.out.println(Constants.PLEASE_ENTER_SSN);
 		String userInputText = getUserInputText();
@@ -92,6 +111,9 @@ public class HomeController {
 		}
 	}
 
+	/**
+	 * @return User's input text from the console (not validated).
+	 */
 	private static String getUserInputText() {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		try {
@@ -103,10 +125,11 @@ public class HomeController {
 		}
 	}
 
-	/*
-	 * Will accept anything that starts with an uppercase letter, followed by
-	 * zero or more of any letter, space, hyphen, ampersand or apostrophes, and
-	 * ending with a letter.
+
+	/**
+	 * @param userInputText
+	 * @return True when user's name has been validated. First letter uppercase A-Z, can contain any letter 
+	 * and whitespace ', &, - in the middle. Also has to end with a letter.
 	 */
 	private static boolean validateUserInputName(String userInputText) {
 		String patternText = Constants.REGEX_PATTERN_NAME_CHECK;
@@ -120,8 +143,10 @@ public class HomeController {
 		return false;
 	}
 
-	/*
-	 * SSN must be 11 characters long and must only consist of numbers.
+
+	/**
+	 * @param userInputText
+	 * @return True when SSN has been validated. Only numberic, exactly 11 characters.
 	 */
 	private static boolean validateUserSSN(String userInputText) {
 		String patternText = Constants.REGEX_PATTERN_SSN_CHECK;
@@ -135,9 +160,10 @@ public class HomeController {
 		return false;
 	}
 
-	/*
-	 * Address must start with an uppercase letter and be at least 3 characters
-	 * long.
+	/**
+	 * @param userInputText
+	 * @return True when user's address has been validated. 
+	 * First letter uppercase A-Z, at least 3 characters long and can contain any word character AND whitespace, ', -
 	 */
 	private static boolean validateUserAddress(String userInputText) {
 		String patternText = Constants.REGEX_PATTERN_ADDRESS_CHECK;
@@ -151,6 +177,11 @@ public class HomeController {
 		return false;
 	}
 
+	/**
+	 * @param userInputText
+	 * @return True when user's telephone input has been validated
+	 * Only numeric and 4-20 characters.
+	 */
 	private static Boolean validateUserTelephone(String userInputText) {
 		String patternText = Constants.REGEX_PATTERN_TELEPHONE_CHECK;
 		Pattern pattern = Pattern.compile(patternText);
