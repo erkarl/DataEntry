@@ -40,9 +40,10 @@ public class Constants {
 	public static String XML_PEOPLE_ELEMENT_NAME = "People";
 	public static String XML_PEOPLE_ATTRIBUTE_NAME = "ID";
 	public static String XML_FILE_LOCATION = "res/people.xml";
-	public static String XML_PERSON_ELEMENT_NAME = "Person";
+	public static String XML_PERSON_ELEMENT_NAME = "Name";
 	public static String XML_SSN_ELEMENT_NAME = "SSN";
 	public static String XML_ADDRESS_ELEMENT_NAME = "Address";
 	public static String XML_TELEPHONE_ELEMENT_NAME = "Telephone";
+	public static String XML_FILE_SAVED = "XML file created.";
 	
 }

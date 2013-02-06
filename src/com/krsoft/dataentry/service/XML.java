@@ -36,70 +36,62 @@ public class XML {
 	}
 
 	public void createXML() {
-		try {
-			DocumentBuilderFactory docFactory = DocumentBuilderFactory
-					.newInstance();
-			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-
-			Document doc = docBuilder.newDocument();
-
-			Element rootElement = doc
-					.createElement(Constants.XML_ROOT_ELEMENT_NAME);
-
-			Element people = doc
-					.createElement(Constants.XML_PEOPLE_ELEMENT_NAME);
-			rootElement.appendChild(people);
-
-			Element name = doc.createElement(Constants.XML_PERSON_ELEMENT_NAME);
-			people.appendChild(name);
-			Element socialSecurityNumber = doc
-					.createElement(Constants.XML_SSN_ELEMENT_NAME);
-			people.appendChild(socialSecurityNumber);
-			Element address = doc
-					.createElement(Constants.XML_ADDRESS_ELEMENT_NAME);
-			people.appendChild(address);
-			Element telephone = doc
-					.createElement(Constants.XML_TELEPHONE_ELEMENT_NAME);
-			people.appendChild(telephone);
-			Attr attribute = doc
-					.createAttribute(Constants.XML_PEOPLE_ATTRIBUTE_NAME);
-
-			int idCounter = 1;
-			for (Person userInput : userInputList) {
-
-				attribute.setValue(String.valueOf(idCounter));
-
-				name.appendChild(doc.createTextNode(userInput.getName()));
-
-				socialSecurityNumber.appendChild(doc.createTextNode(userInput
-						.getSocialSecurityNumber()));
-
-				address.appendChild(doc.createTextNode(userInput.getAddress()));
-
-				telephone.appendChild(doc.createTextNode(userInput
-						.getTelephone()));
-
-				System.out.println(userInput.getName() + " "
-						+ userInput.getSocialSecurityNumber() + " ID "
-						+ idCounter);
-				idCounter++;
-			}
-
-			TransformerFactory transformerFactory = TransformerFactory
-					.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new File(
-					Constants.XML_FILE_LOCATION));
-
-			transformer.transform(source, result);
-			System.out.println("File saved.");
-
-		} catch (ParserConfigurationException pce) {
-			pce.printStackTrace();
-		} catch (TransformerException tfe) {
-			tfe.printStackTrace();
-		}
+		  try {
+			  	int id = 1;
+				DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+				DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+		 
+				// root elements
+				Document doc = docBuilder.newDocument();
+				Element rootElement = doc.createElement(Constants.XML_ROOT_ELEMENT_NAME);
+				doc.appendChild(rootElement);
+		 
+				// staff elements
+				Element people = doc.createElement(Constants.XML_PEOPLE_ELEMENT_NAME);
+				rootElement.appendChild(people);
+		 
+				// set attribute to staff element
+				Attr attr = doc.createAttribute(Constants.XML_PEOPLE_ATTRIBUTE_NAME);
+				attr.setValue(String.valueOf(id));
+				people.setAttributeNode(attr);
+		 
+				// Name
+				Element name = doc.createElement(Constants.XML_PERSON_ELEMENT_NAME);
+				name.appendChild(doc.createTextNode("yong"));
+				people.appendChild(name);
+		 
+				// SSN
+				Element socialSecurityNumber = doc.createElement(Constants.XML_SSN_ELEMENT_NAME);
+				socialSecurityNumber.appendChild(doc.createTextNode("38812062735"));
+				people.appendChild(socialSecurityNumber);
+		 
+				// Address
+				Element address = doc.createElement(Constants.XML_ADDRESS_ELEMENT_NAME);
+				address.appendChild(doc.createTextNode("Nooruse 3a"));
+				people.appendChild(address);
+		 
+				// salary elements
+				Element telephone = doc.createElement(Constants.XML_TELEPHONE_ELEMENT_NAME);
+				telephone.appendChild(doc.createTextNode("100000"));
+				people.appendChild(telephone);
+		 
+				// write the content into xml file
+				TransformerFactory transformerFactory = TransformerFactory.newInstance();
+				Transformer transformer = transformerFactory.newTransformer();
+				DOMSource source = new DOMSource(doc);
+				StreamResult result = new StreamResult(new File(Constants.XML_FILE_LOCATION));
+		 
+				// Output to console for testing
+				// StreamResult result = new StreamResult(System.out);
+		 
+				transformer.transform(source, result);
+		 
+				System.out.println(Constants.XML_FILE_SAVED);
+		 
+			  } catch (ParserConfigurationException pce) {
+				pce.printStackTrace();
+			  } catch (TransformerException tfe) {
+				tfe.printStackTrace();
+			  }
 	}
 }
